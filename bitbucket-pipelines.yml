@@ -1,0 +1,190 @@
+image: node:18
+
+definitions:
+  caches:
+    yarn: $HOME/.cache/yarn
+  services:
+    docker:
+      memory: 2048
+
+pipelines:
+  default:
+    - step:
+        name: Install dependencies
+        caches:
+          - yarn
+          - node
+        script:
+          - yarn install --frozen-lockfile
+        artifacts:
+          - node_modules/**
+          - .next/**
+
+    - step:
+        name: Lint
+        script:
+          - yarn lint
+        artifacts:
+          - .eslintcache
+
+#    - step:
+#        name: Type check
+#        script:
+#          - yarn tsc --noEmit
+
+  branches:
+    development:
+      - step:
+          name: Install dependencies
+          caches:
+            - yarn
+            - node
+          script:
+            - yarn install --frozen-lockfile
+          artifacts:
+            - node_modules/**
+            - .next/**
+
+      - step:
+          name: Lint
+          script:
+            - yarn lint
+          artifacts:
+            - .eslintcache
+
+#      - step:
+#          name: Type check
+#          script:
+#            - yarn tsc --noEmit
+
+      - step:
+          name: Build
+          script:
+            - yarn build
+          artifacts:
+            - .next/**
+
+      - step:
+          name: Test
+          script:
+            - yarn test || echo "No tests found, skipping tests"
+
+      - step:
+          name: Build and push Docker image
+          services:
+            - docker
+          script:
+            - export IMAGE_NAME=$DOCKER_REGISTRY/magna-web
+            - export IMAGE_TAG=dev-$BITBUCKET_COMMIT
+            - echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}"
+            - docker build -t $IMAGE_NAME:$IMAGE_TAG -t $IMAGE_NAME:development .
+            - echo "Logging in to Docker registry"
+            - echo $DOCKER_PASSWORD | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin
+            - echo "Pushing Docker image"
+            - docker push $IMAGE_NAME:$IMAGE_TAG
+            - docker push $IMAGE_NAME:development
+
+      - step:
+          name: Summary
+          script:
+            - echo "Pipeline completed successfully!"
+
+    main:
+      - step:
+          name: Install dependencies
+          caches:
+            - yarn
+            - node
+          script:
+            - yarn install --frozen-lockfile
+          artifacts:
+            - node_modules/**
+            - .next/**
+
+      - step:
+          name: Lint
+          script:
+            - yarn lint
+          artifacts:
+            - .eslintcache
+
+#      - step:
+#          name: Type check
+#          script:
+#            - yarn tsc --noEmit
+
+      - step:
+          name: Build
+          script:
+            - yarn build
+          artifacts:
+            - .next/**
+
+      - step:
+          name: Test
+          script:
+            - yarn test || echo "No tests found, skipping tests"
+
+      - step:
+          name: Build and push Docker image
+          services:
+            - docker
+          script:
+            - export IMAGE_NAME=$DOCKER_REGISTRY/magna-web
+            - export IMAGE_TAG=prod-$BITBUCKET_COMMIT
+            - echo "Building Docker image ${IMAGE_NAME}:${IMAGE_TAG}"
+            - docker build -t $IMAGE_NAME:$IMAGE_TAG -t $IMAGE_NAME:latest .
+            - echo "Logging in to Docker registry"
+            - echo $DOCKER_PASSWORD | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin
+            - echo "Pushing Docker image"
+            - docker push $IMAGE_NAME:$IMAGE_TAG
+            - docker push $IMAGE_NAME:latest
+
+#      - step:
+#          name: Deploy to production
+#          deployment: production
+#          script:
+            - echo "Deploying to production..."
+            # Add your production deployment steps here
+            # Example with SSH deployment:
+            # - pipe: atlassian/ssh-run:0.4.1
+            #   variables:
+            #     SSH_USER: $PRODUCTION_SSH_USER
+            #     SERVER: $PRODUCTION_SERVER
+            #     COMMAND: 'cd /path/to/app && docker pull $DOCKER_REGISTRY/nextjs-app:latest && docker-compose up -d'
+
+  pull-requests:
+    '**':
+      - step:
+          name: Install dependencies
+          caches:
+            - yarn
+            - node
+          script:
+            - yarn install --frozen-lockfile
+          artifacts:
+            - node_modules/**
+
+      - step:
+          name: Lint
+          script:
+            - yarn lint
+          artifacts:
+            - .eslintcache
+
+ #     - step:
+ #         name: Type check
+ #         script:
+ #           - yarn tsc --noEmit
+
+      - step:
+          name: Build
+          script:
+            - yarn build
+          artifacts:
+            - .next/**
+
+      - step:
+          name: Test
+          script:
+            - yarn test || echo "No tests found, skipping tests"

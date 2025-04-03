@@ -1,0 +1,9 @@
+.interrogative-email-body {
+  p {
+    margin-top: 12px;
+
+    &:first-child {
+      margin-top: 0px !important;
+    }
+  }
+}

@@ -1,0 +1,1114 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PLG Legal Toolbox",
+    "description": "PLG legal toolbox",
+    "termsOfService": "https://plglawyersfl.com/",
+    "contact": { "email": "shubham.dipt@gmail.com" },
+    "license": { "name": "BSD License" },
+    "version": "v1"
+  },
+  "host": "mypolicies.toplegalai.com",
+  "schemes": ["https"],
+  "basePath": "/api",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": { "Basic": { "type": "basic" } },
+  "security": [{ "Basic": [] }],
+  "paths": {
+    "/accounts/change-password/": {
+      "post": {
+        "operationId": "accounts_change-password_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["old_password", "new_password_1", "new_password_2"],
+              "type": "object",
+              "properties": {
+                "old_password": { "type": "string" },
+                "new_password_1": { "type": "string" },
+                "new_password_2": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": { "200": { "description": "Success" }, "400": { "description": "Error" } },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/logout/": {
+      "post": {
+        "operationId": "accounts_logout_create",
+        "description": "",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/profile/": {
+      "get": {
+        "operationId": "accounts_profile_list",
+        "description": "Retrieve a AppUserProfile instance.",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["accounts"]
+      },
+      "put": {
+        "operationId": "accounts_profile_update",
+        "description": "Update an AppUserProfile instance.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["email"],
+              "type": "object",
+              "properties": {
+                "first_name": { "type": "string" },
+                "last_name": { "type": "string" },
+                "email": { "type": "string" },
+                "mobile": { "type": "string" },
+                "phone": { "type": "string" },
+                "address_line_1": { "type": "string" },
+                "address_line_2": { "type": "string" },
+                "city": { "type": "string" },
+                "state": { "type": "string" },
+                "country": { "type": "string" },
+                "zip_code": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Success" },
+          "400": { "description": "Error" },
+          "404": { "description": "Not found" }
+        },
+        "tags": ["accounts"]
+      },
+      "delete": {
+        "operationId": "accounts_profile_delete",
+        "description": "Deactivate an AppUserProfile instance.",
+        "parameters": [],
+        "responses": { "204": { "description": "" } },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/register/": {
+      "post": {
+        "operationId": "accounts_register_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["first_name", "last_name", "email", "password"],
+              "type": "object",
+              "properties": {
+                "first_name": { "type": "string" },
+                "last_name": { "type": "string" },
+                "email": { "type": "string" },
+                "password": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": { "201": { "description": "Success" }, "400": { "description": "Error" } },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/resend-verification-email/": {
+      "post": {
+        "operationId": "accounts_resend-verification-email_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["email"],
+              "type": "object",
+              "properties": { "email": { "type": "string" } }
+            }
+          }
+        ],
+        "responses": { "200": { "description": "Success" }, "400": { "description": "Error" } },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/reset-password/": {
+      "post": {
+        "operationId": "accounts_reset-password_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["email"],
+              "type": "object",
+              "properties": { "email": { "type": "string" } }
+            }
+          }
+        ],
+        "responses": { "200": { "description": "Success" }, "400": { "description": "Error" } },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/reset-password/{uidb64}/{token}/confirm/": {
+      "post": {
+        "operationId": "accounts_reset-password_confirm_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["new_password_1", "new_password_2"],
+              "type": "object",
+              "properties": {
+                "new_password_1": { "type": "string" },
+                "new_password_2": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": { "200": { "description": "Success" }, "400": { "description": "Error" } },
+        "tags": ["accounts"]
+      },
+      "parameters": [
+        { "name": "uidb64", "in": "path", "required": true, "type": "string" },
+        { "name": "token", "in": "path", "required": true, "type": "string" }
+      ]
+    },
+    "/accounts/token/": {
+      "post": {
+        "operationId": "accounts_token_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/AppUserTokenObtainPair" }
+          }
+        ],
+        "responses": {
+          "201": { "description": "", "schema": { "$ref": "#/definitions/AppUserTokenObtainPair" } }
+        },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/token/refresh/": {
+      "post": {
+        "operationId": "accounts_token_refresh_create",
+        "description": "Takes a refresh type JSON web token and returns an access type JSON web\ntoken if the refresh token is valid.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/TokenRefresh" }
+          }
+        ],
+        "responses": {
+          "201": { "description": "", "schema": { "$ref": "#/definitions/TokenRefresh" } }
+        },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/user/": {
+      "get": {
+        "operationId": "accounts_user_list",
+        "description": "",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["accounts"]
+      },
+      "parameters": []
+    },
+    "/accounts/verify-email/{uidb64}/{token}/confirm/": {
+      "get": {
+        "operationId": "accounts_verify-email_confirm_list",
+        "description": "",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["accounts"]
+      },
+      "parameters": [
+        { "name": "uidb64", "in": "path", "required": true, "type": "string" },
+        { "name": "token", "in": "path", "required": true, "type": "string" }
+      ]
+    },
+    "/chats/helpful-questions/general/": {
+      "get": {
+        "operationId": "chats_helpful-questions_general_list",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/HelpfulQuestion" } }
+          }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": []
+    },
+    "/chats/helpful-questions/policy/": {
+      "get": {
+        "operationId": "chats_helpful-questions_policy_list",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/HelpfulQuestion" } }
+          }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": []
+    },
+    "/chats/history/legal/": {
+      "get": {
+        "operationId": "chats_history_legal_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": ["count", "results"],
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer" },
+                "next": { "type": "string", "format": "uri", "x-nullable": true },
+                "previous": { "type": "string", "format": "uri", "x-nullable": true },
+                "results": {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/ChatSessionHistory" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": []
+    },
+    "/chats/history/policy/": {
+      "get": {
+        "operationId": "chats_history_policy_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": ["count", "results"],
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer" },
+                "next": { "type": "string", "format": "uri", "x-nullable": true },
+                "previous": { "type": "string", "format": "uri", "x-nullable": true },
+                "results": {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/ChatSessionHistory" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": []
+    },
+    "/chats/history/policy/{policy_id}/": {
+      "get": {
+        "operationId": "chats_history_policy_read",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": ["count", "results"],
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer" },
+                "next": { "type": "string", "format": "uri", "x-nullable": true },
+                "previous": { "type": "string", "format": "uri", "x-nullable": true },
+                "results": {
+                  "type": "array",
+                  "items": { "$ref": "#/definitions/ChatSessionHistory" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": [{ "name": "policy_id", "in": "path", "required": true, "type": "string" }]
+    },
+    "/chats/session/chat/{id}/bookmark/": {
+      "patch": {
+        "operationId": "chats_session_chat_bookmark_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ChatBookmarked" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "", "schema": { "$ref": "#/definitions/ChatBookmarked" } }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this chat.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/chats/session/chat/{id}/like/": {
+      "patch": {
+        "operationId": "chats_session_chat_like_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ChatLiked" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "", "schema": { "$ref": "#/definitions/ChatLiked" } }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this chat.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/chats/session/create/": {
+      "post": {
+        "operationId": "chats_session_create_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ChatSession" }
+          }
+        ],
+        "responses": {
+          "201": { "description": "", "schema": { "$ref": "#/definitions/ChatSession" } }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": []
+    },
+    "/chats/session/{id}/delete/": {
+      "delete": {
+        "operationId": "chats_session_delete_delete",
+        "description": "",
+        "parameters": [],
+        "responses": { "204": { "description": "" } },
+        "tags": ["chats"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this chat session.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/chats/session/{id}/update/": {
+      "put": {
+        "operationId": "chats_session_update_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ChatSession" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "", "schema": { "$ref": "#/definitions/ChatSession" } }
+        },
+        "tags": ["chats"]
+      },
+      "patch": {
+        "operationId": "chats_session_update_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ChatSession" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "", "schema": { "$ref": "#/definitions/ChatSession" } }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this chat session.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/chats/{session_id}/chat/create/": {
+      "post": {
+        "operationId": "chats_chat_create_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["role", "content"],
+              "type": "object",
+              "properties": { "role": { "type": "string" }, "content": { "type": "string" } }
+            }
+          }
+        ],
+        "responses": { "201": { "description": "Success" }, "400": { "description": "Error" } },
+        "tags": ["chats"]
+      },
+      "parameters": [{ "name": "session_id", "in": "path", "required": true, "type": "string" }]
+    },
+    "/chats/{session_id}/chat/refresh-latest-response/": {
+      "get": {
+        "operationId": "chats_chat_refresh-latest-response_list",
+        "description": "",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["chats"]
+      },
+      "parameters": [{ "name": "session_id", "in": "path", "required": true, "type": "string" }]
+    },
+    "/chats/{session_id}/session/": {
+      "get": {
+        "operationId": "chats_session_list",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/Chat" } }
+          }
+        },
+        "tags": ["chats"]
+      },
+      "parameters": [{ "name": "session_id", "in": "path", "required": true, "type": "string" }]
+    },
+    "/documents/{id}/": {
+      "get": {
+        "operationId": "documents_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "", "schema": { "$ref": "#/definitions/DocumentContent" } }
+        },
+        "tags": ["documents"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this Document.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/documents/{id}/delete/": {
+      "delete": {
+        "operationId": "documents_delete_delete",
+        "description": "",
+        "parameters": [],
+        "responses": { "204": { "description": "" } },
+        "tags": ["documents"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this Document.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/policies/": {
+      "get": {
+        "operationId": "policies_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": ["count", "results"],
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer" },
+                "next": { "type": "string", "format": "uri", "x-nullable": true },
+                "previous": { "type": "string", "format": "uri", "x-nullable": true },
+                "results": { "type": "array", "items": { "$ref": "#/definitions/Policy" } }
+              }
+            }
+          }
+        },
+        "tags": ["policies"]
+      },
+      "parameters": []
+    },
+    "/policies/create/": {
+      "post": {
+        "operationId": "policies_create_create",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "required": ["name"],
+              "type": "object",
+              "properties": { "name": { "type": "string" }, "files": { "type": "file" } }
+            }
+          }
+        ],
+        "responses": { "201": { "description": "Success" }, "400": { "description": "Error" } },
+        "tags": ["policies"]
+      },
+      "parameters": []
+    },
+    "/policies/{id}/": {
+      "get": {
+        "operationId": "policies_read",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "", "schema": { "$ref": "#/definitions/PolicyDocument" } }
+        },
+        "tags": ["policies"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this Policy.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/policies/{id}/delete/": {
+      "delete": {
+        "operationId": "policies_delete_delete",
+        "description": "",
+        "parameters": [],
+        "responses": { "204": { "description": "" } },
+        "tags": ["policies"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this Policy.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/policies/{id}/summary/": {
+      "get": {
+        "operationId": "policies_summary_list",
+        "description": "",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["policies"]
+      },
+      "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }]
+    },
+    "/policies/{id}/text-extraction-status/": {
+      "get": {
+        "operationId": "policies_text-extraction-status_list",
+        "description": "",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["policies"]
+      },
+      "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }]
+    },
+    "/policies/{id}/update/": {
+      "put": {
+        "operationId": "policies_update_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/PolicyCreate" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "", "schema": { "$ref": "#/definitions/PolicyCreate" } }
+        },
+        "tags": ["policies"]
+      },
+      "patch": {
+        "operationId": "policies_update_partial_update",
+        "description": "",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/PolicyCreate" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "", "schema": { "$ref": "#/definitions/PolicyCreate" } }
+        },
+        "tags": ["policies"]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A UUID string identifying this Policy.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/utilities/cities/": {
+      "get": {
+        "operationId": "utilities_cities_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "startswith",
+            "in": "query",
+            "description": "Filter cities whose names start with the provided value",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": { "type": "array", "items": { "$ref": "#/definitions/City" } }
+          }
+        },
+        "tags": ["utilities"]
+      },
+      "parameters": []
+    },
+    "/utilities/countries/": {
+      "get": {
+        "operationId": "utilities_countries_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": ["count", "results"],
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer" },
+                "next": { "type": "string", "format": "uri", "x-nullable": true },
+                "previous": { "type": "string", "format": "uri", "x-nullable": true },
+                "results": { "type": "array", "items": { "$ref": "#/definitions/Country" } }
+              }
+            }
+          }
+        },
+        "tags": ["utilities"]
+      },
+      "parameters": []
+    },
+    "/utilities/languages/": {
+      "get": {
+        "operationId": "utilities_languages_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": ["count", "results"],
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer" },
+                "next": { "type": "string", "format": "uri", "x-nullable": true },
+                "previous": { "type": "string", "format": "uri", "x-nullable": true },
+                "results": { "type": "array", "items": { "$ref": "#/definitions/Language" } }
+              }
+            }
+          }
+        },
+        "tags": ["utilities"]
+      },
+      "parameters": []
+    },
+    "/utilities/states/": {
+      "get": {
+        "operationId": "utilities_states_list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "required": ["count", "results"],
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer" },
+                "next": { "type": "string", "format": "uri", "x-nullable": true },
+                "previous": { "type": "string", "format": "uri", "x-nullable": true },
+                "results": { "type": "array", "items": { "$ref": "#/definitions/State" } }
+              }
+            }
+          }
+        },
+        "tags": ["utilities"]
+      },
+      "parameters": []
+    }
+  },
+  "definitions": {
+    "AppUserTokenObtainPair": {
+      "required": ["email", "password"],
+      "type": "object",
+      "properties": {
+        "email": { "title": "Email", "type": "string", "minLength": 1 },
+        "password": { "title": "Password", "type": "string", "minLength": 1 }
+      }
+    },
+    "TokenRefresh": {
+      "required": ["refresh"],
+      "type": "object",
+      "properties": {
+        "refresh": { "title": "Refresh", "type": "string", "minLength": 1 },
+        "access": { "title": "Access", "type": "string", "readOnly": true, "minLength": 1 }
+      }
+    },
+    "HelpfulQuestion": {
+      "required": ["question"],
+      "type": "object",
+      "properties": {
+        "question": { "title": "Question", "type": "string", "maxLength": 255, "minLength": 1 }
+      }
+    },
+    "ChatSessionHistory": {
+      "type": "object",
+      "properties": {
+        "id": { "title": "ID", "type": "string", "format": "uuid", "readOnly": true },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "name": { "title": "Name", "type": "string", "x-nullable": true },
+        "policy": { "title": "Policy", "type": "string", "format": "uuid", "x-nullable": true }
+      }
+    },
+    "ChatBookmarked": {
+      "type": "object",
+      "properties": {
+        "bookmarked": { "title": "Bookmarked", "type": "boolean", "x-nullable": true }
+      }
+    },
+    "ChatLiked": {
+      "type": "object",
+      "properties": { "liked": { "title": "Liked", "type": "boolean", "x-nullable": true } }
+    },
+    "ChatSession": {
+      "type": "object",
+      "properties": {
+        "id": { "title": "ID", "type": "string", "format": "uuid", "readOnly": true },
+        "policy": { "title": "Policy", "type": "string", "format": "uuid", "x-nullable": true },
+        "name": { "title": "Name", "type": "string", "x-nullable": true }
+      }
+    },
+    "Chat": {
+      "required": ["content", "role"],
+      "type": "object",
+      "properties": {
+        "content": { "title": "Content", "type": "string", "minLength": 1 },
+        "role": { "title": "Role", "type": "string", "enum": ["user", "assistant"] },
+        "id": { "title": "Id", "type": "string", "format": "uuid", "readOnly": true },
+        "response_to": {
+          "title": "Response to",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": true
+        },
+        "liked": { "title": "Liked", "type": "boolean", "x-nullable": true },
+        "bookmarked": { "title": "Bookmarked", "type": "boolean", "x-nullable": true }
+      }
+    },
+    "DocumentContent": {
+      "required": ["name"],
+      "type": "object",
+      "properties": {
+        "id": { "title": "ID", "type": "string", "format": "uuid", "readOnly": true },
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "minLength": 1 },
+        "upload": { "title": "Upload", "type": "string", "readOnly": true, "format": "uri" },
+        "content": { "title": "Content", "type": "object", "x-nullable": true },
+        "extracted": {
+          "title": "Text extraction status",
+          "description": "True if text extraction process has been completed",
+          "type": "boolean"
+        }
+      }
+    },
+    "Document": {
+      "required": ["name"],
+      "type": "object",
+      "properties": {
+        "id": { "title": "ID", "type": "string", "format": "uuid", "readOnly": true },
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "minLength": 1 },
+        "upload": { "title": "Upload", "type": "string", "readOnly": true, "format": "uri" },
+        "extracted": {
+          "title": "Text extraction status",
+          "description": "True if text extraction process has been completed",
+          "type": "boolean"
+        }
+      }
+    },
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "id": { "title": "ID", "type": "string", "format": "uuid", "readOnly": true },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modified": {
+          "title": "Modified",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "x-nullable": true },
+        "documents": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Document" },
+          "readOnly": true
+        },
+        "extraction_status": { "title": "Extraction status", "type": "string", "readOnly": true }
+      }
+    },
+    "PolicyDocument": {
+      "type": "object",
+      "properties": {
+        "id": { "title": "ID", "type": "string", "format": "uuid", "readOnly": true },
+        "created": {
+          "title": "Created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modified": {
+          "title": "Modified",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "x-nullable": true },
+        "documents": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/DocumentContent" },
+          "readOnly": true
+        },
+        "extraction_status": { "title": "Extraction status", "type": "string", "readOnly": true }
+      }
+    },
+    "PolicyCreate": {
+      "type": "object",
+      "properties": {
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "minLength": 1 },
+        "files": {
+          "type": "array",
+          "items": { "type": "string", "readOnly": true, "format": "uri" }
+        }
+      }
+    },
+    "City": {
+      "required": ["state", "country", "name"],
+      "type": "object",
+      "properties": {
+        "id": { "title": "ID", "type": "integer", "readOnly": true },
+        "state": { "title": "State", "type": "string", "minLength": 1 },
+        "country": { "title": "Country", "type": "string", "minLength": 1 },
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "minLength": 1 }
+      }
+    },
+    "Country": {
+      "required": ["code", "name"],
+      "type": "object",
+      "properties": {
+        "code": {
+          "title": "Code",
+          "description": "2-letters country codes",
+          "type": "string",
+          "maxLength": 2,
+          "minLength": 1
+        },
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "minLength": 1 }
+      }
+    },
+    "Language": {
+      "required": ["code", "name"],
+      "type": "object",
+      "properties": {
+        "code": {
+          "title": "Code",
+          "description": "ISO 639-1 standard language codes",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1
+        },
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "minLength": 1 }
+      }
+    },
+    "State": {
+      "required": ["name", "country"],
+      "type": "object",
+      "properties": {
+        "id": { "title": "ID", "type": "integer", "readOnly": true },
+        "name": { "title": "Name", "type": "string", "maxLength": 255, "minLength": 1 },
+        "country": { "title": "Country", "type": "string" }
+      }
+    }
+  }
+}

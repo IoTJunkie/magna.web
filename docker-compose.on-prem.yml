@@ -1,0 +1,24 @@
+# version: '3.8'
+
+services:
+  nextjs-app:
+    build:
+      context: .
+    container_name: web
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_ENDPOINT_URL=http://app-testing.askmagna.ai:8000/api
+#      - NEXT_PUBLIC_ENDPOINT_URL="http://localhost:8000/api"
+      - NEXT_PUBLIC_ENDPOINT_MEDIA=http://app-testing.askmagna.ai:8002
+      - NEXT_PUBLIC_WEB_DOMAIN=http://app-testing.askmagna.ai:3000
+      - NEXTAUTH_SECRET="5!=$jvjh3dxy4bd_t@+i%%hb2yhl4)k792ghz#rvq9jdr05h1^"
+      - NEXT_PUBLIC_GOOGLE_DRIVE_CLIENT_ID="18475879381-hsd82nddiinkmsr75v2a6cvo8rhvbvs2.apps.googleusercontent.com"
+      - NEXT_PUBLIC_GOOGLE_DRIVE_API_KEY="AIzaSyAdGUDtyTainVWz53jZm_pQIZm4gCGCzag"
+      - NEXT_PUBLIC_DROPBOX_API_KEY="csvat2185szgzjy"
+      - NEXT_PUBLIC_BOX_CLIENT_ID="0w9g87g8gsjawlpo4cxy47fv663xyln8"
+      - NEXT_PUBLIC_BOX_CLIENT_SECRET="r4cQ1W8hhFJiTOdWZKIo97eHr64Wa705"
+      - NEXT_PUBLIC_MY_CASE_CLIENT_ID="KYbW86AP4x4xKEbc"
+      - NEXT_PUBLIC_MY_CASE_CLIENT_SECRET="vA6iD9diiWJBSugrsLfGTCDEQeZ62m76"
+    command: yarn dev
+

@@ -1,0 +1,14 @@
+.treeItem {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  :global {
+    .rogdio4 {
+      position: absolute;
+      right: 0px;
+    }
+    .fui-TreeItemLayout__main {
+      width: 100%;
+      padding: 0px !important;
+    }
+  }
+}

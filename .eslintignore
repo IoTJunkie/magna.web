@@ -1,0 +1,11 @@
+.next/*,
+*.spec.ts
+*.test.tsx
+*.d.ts
+index.css
+tailwind.config.js
+.lintstagedrc.js
+*.mjs
+*.js
+*.cjs
+**/*.test.js

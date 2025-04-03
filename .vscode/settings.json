@@ -1,0 +1,14 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  "editor.quickSuggestions": {
+    "strings": true // forces VS Code to trigger completions when editing "string" content
+  },
+  "eslint.options": {
+    "rulePaths": ["./eslint-rules"]
+  },
+  "cSpell.words": ["Abortable", "classname", "rulesdir", "tailwindcss"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

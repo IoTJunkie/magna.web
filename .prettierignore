@@ -1,0 +1,21 @@
+# Next.js build output
+.next
+
+# Node modules
+node_modules
+
+# Environment variables
+.env/*
+
+# Log files
+*.log
+
+# Package lock files
+package-lock.json
+yarn.lock
+
+# Cache files
+.cache
+
+# Public directory
+public

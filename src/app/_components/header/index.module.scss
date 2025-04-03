@@ -1,0 +1,56 @@
+.label {
+  width: 66px;
+  height: 32px;
+  border-radius: 100px;
+  background: #f3f7f5;
+  position: relative;
+  display: block;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:after {
+    content: '';
+    width: 28px;
+    height: 28px;
+    border-radius: 100px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background-color: #418c61;
+    transition: 0.3s;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 2px;
+  transition: 0.8s;
+  z-index: 1;
+}
+
+.light {
+  left: 2px;
+}
+
+.dark {
+  left: 36px;
+}
+
+.input {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+
+  &:checked {
+    + {
+      label {
+        background-color: #0b0b0c;
+
+        &:after {
+          left: 64px;
+          transform: translateX(-100%);
+        }
+      }
+    }
+  }
+}
